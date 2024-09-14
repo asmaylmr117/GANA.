@@ -172,7 +172,7 @@ const sectionAudio = [
 
 // إضافة روابط الصور للأقسام
 const firstTenSectionImages = [
-  "public/img/mostafa.jpg", "public/img/abdoo.jpg", "public/img/Sedeq.jpg", "public/img/hosery.jpg", "public/img/bana.jpg", "public/img/agmy1.jpg", "public/img/sodes.jpg", "public/img/moeqlyi.jpeg", "public/img/bloshy . jpg", "public/img/mshary.jpg"
+  "img/mostafa.jpg", "img/abdoo.jpg", "img/Sedeq.jpg", "img/hosery.jpg", "img/bana.jpg", "img/agmy1.jpg", "img/sodes.jpg", "img/moeqlyi.jpeg", "img/bloshy . jpg", "img/mshary.jpg"
 
 ];
 
@@ -295,15 +295,15 @@ const App = () => {
                   <li>2- صدقة جارية على روح        </li>
                   <div className="flex space-x-4">
                     <div className="text-center">
-                      <img src="baba.jpg" className="w-16 h-20 rounded-full mx-auto mb-2" />
+                      <img src="img/baba.jpg" className="w-16 h-20 rounded-full mx-auto mb-2" />
                       <li> والدي الغالي الحاج إسماعيل إبراهيم العناني</li>
                     </div>
                     <div className="text-center">
-                      <img src="bro.jpg" className="w-16 h-20 rounded-full mx-auto mb-2" />
+                      <img src="img/bro.jpg" className="w-16 h-20 rounded-full mx-auto mb-2" />
                       <li> أخي محمود اسماعيل العناني</li>
                     </div>
                     <div className="text-center">
-                      <img src="hema.jpg" className="w-16 h-20 rounded-full mx-auto mb-2" />
+                      <img src="img/hema.jpg" className="w-16 h-20 rounded-full mx-auto mb-2" />
                       <li> الأستاذ إبراهيم المأذون</li>
                     </div>
                   </div>
@@ -314,7 +314,7 @@ const App = () => {
             {activeSidebarSection === 'developer' && (
               <div className="text-sm p-2">
                 <img
-                  src="mos.jpg"
+                  src="img/mos.jpg"
                   alt="مطور الموقع"
                   style={{ width: '100px', height: '140px', objectFit: 'cover' }}
                   className="rounded-full mx-auto mb-2"
@@ -1269,3 +1269,4 @@ const App = () => {
 
 
 export default App
+
