@@ -260,7 +260,7 @@ const App = () => {
   };
 
   return (
-    <div className="container mx-auto p-4">
+    <div className="container mx-auto p-4 background-image">
       <div className="bg-gray-800 p-4 flex justify-between items-center">
         <div className="flex items-center space-x-2 sm:space-x-4">
           <button className="text-yellow-500 icon" onClick={toggleSidebar}>
