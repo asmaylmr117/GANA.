@@ -2,6 +2,8 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
+import backgroundImage from '/img/photo.jpg';
+
 const surahNames = [
   "الفاتحة", "البقرة", "آل عمران", "النساء", "المائدة", "الأنعام", "الأعراف", "الأنفال", "التوبة", "يونس",
   "هود", "يوسف", "الرعد", "إبراهيم", "الحجر", "النحل", "الإسراء", "الكهف", "مريم", "طه",
@@ -172,7 +174,7 @@ const sectionAudio = [
 
 // إضافة روابط الصور للأقسام
 const firstTenSectionImages = [
-  "img/mostafa.jpg", "img/abdoo.jpg", "img/Sedeq.jpg", "img/hosery.jpg", "img/bana.jpg", "img/agmy1.jpg", "img/sodes.jpg", "img/moeqlyi.jpeg", "img/bloshy . jpg", "img/mshary.jpg"
+  "img/mostafa.jpg", "img/abdoo.jpg", "img/Sedeq.jpg", "img/hosery.jpg", "img/bana.jpg", "img/agmy1.jpg", "img/sodes.jpg", "img/moeqlyi.jpeg", "img/bloshy . jpg", "public/img/mshary.jpg"
 
 ];
 
@@ -258,9 +260,11 @@ const App = () => {
   const handleReset = () => {
     setCount(0);
   };
+ 
 
   return (
-    <div className="container mx-auto p-4 background-image">
+    <div className="container mx-auto p-4 " class="background-image"style={{
+      backgroundImage: `url(${backgroundImage})`}} >
       <div className="bg-gray-800 p-4 flex justify-between items-center">
         <div className="flex items-center space-x-2 sm:space-x-4">
           <button className="text-yellow-500 icon" onClick={toggleSidebar}>
@@ -1269,4 +1273,5 @@ const App = () => {
 
 
 export default App
+
 
