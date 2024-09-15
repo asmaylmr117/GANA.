@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useMemo, lazy, Suspense } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
@@ -174,7 +174,7 @@ const sectionAudio = [
 
 // إضافة روابط الصور للأقسام
 const firstTenSectionImages = [
-  "/img/mostafa.jpg", "/img/abdoo.jpg", "/img/Sedeq.jpg", "/img/hosery.jpg", "/img/bana.jpg", "/img/agmy1.jpg", "/img/sodes.jpg", "/img/moeqlyi.jpeg", "/img/bloshy . jpg", "/img/mshary.jpg"
+  "img/mostafa.jpg", "img/abdoo.jpg", "img/Sedeq.jpg", "img/hosery.jpg", "img/bana.jpg", "img/agmy1.jpg", "img/sodes.jpg", "img/moeqlyi.jpeg", "img/bloshy . jpg", "public/img/mshary.jpg"
 
 ];
 
@@ -223,7 +223,7 @@ const App = () => {
     setActiveAzkarContent(section);
   };
 
-  const sectionImages = Array(114).fill(firstTenSectionImages);
+ 
   const [activeAudio, setActiveAudio] = useState(null);
   const [audioInstance, setAudioInstance] = useState([]);
   const playAudio = (audioUrl, index) => {
@@ -261,7 +261,7 @@ const App = () => {
     setCount(0);
   };
  
-
+  const sectionImages = useMemo(() => Array(114).fill(firstTenSectionImages), []);
   return (
     <div className="container mx-auto p-4 " class="background-image"style={{
       backgroundImage: `url(${backgroundImage})`}} >
