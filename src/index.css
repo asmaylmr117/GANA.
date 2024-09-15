@@ -65,7 +65,7 @@ a {
 }
 
 .background-image {
-  background-image: url('./img/photo.jpg');
+  
   background-size: cover;
   /* تغطية الشاشة بالكامل */
   background-repeat: no-repeat;
