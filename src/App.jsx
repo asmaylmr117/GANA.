@@ -174,7 +174,7 @@ const sectionAudio = [
 
 // إضافة روابط الصور للأقسام
 const firstTenSectionImages = [
-  "img/mostafa.jpg", "img/abdoo.jpg", "img/Sedeq.jpg", "img/hosery.jpg", "img/bana.jpg", "img/agmy1.jpg", "img/sodes.jpg", "img/moeqlyi.jpeg", "img/bloshy . jpg", "public/img/mshary.jpg"
+  "/img/mostafa.jpg", "/img/abdoo.jpg", "/img/Sedeq.jpg", "/img/hosery.jpg", "/img/bana.jpg", "/img/agmy1.jpg", "/img/sodes.jpg", "/img/moeqlyi.jpeg", "/img/bloshy . jpg", "/img/mshary.jpg"
 
 ];
 
