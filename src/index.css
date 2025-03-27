@@ -15,7 +15,7 @@ a {
 .developer-name {
   text-align: center;
   margin-top: 5px;
-  color: rgb(24, 23, 23);
+  
   margin-top: 5px;
   /* تحريك اسم المطور إلى أسفل الصورة */
 }
@@ -65,7 +65,7 @@ a {
 }
 
 .background-image {
-  
+  background-image: url('public/img/photo.jpg');
   background-size: cover;
   /* تغطية الشاشة بالكامل */
   background-repeat: no-repeat;
@@ -87,10 +87,7 @@ a:hover {
   background-color: rgb(90, 90, 236);
 }
 
-.sidebar-section.about,
-.sidebar-section.developer {
-  color: rgb(24, 23, 23);
-}
+
 
 .sidebar-section.logout {
   color: red;
@@ -114,13 +111,13 @@ a:hover {
 }
 
 .azkar-section:hover {
-  transform: scale(1.1);
+  transform: scale(1.0);
   background-color: aqua;
 }
 
 #GO:hover {
   background-color: rgb(19, 195, 207);
-  transform: scale(1.1);
+  transform: scale(1.0);
 }
 
 #GN:hover {
