@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { surahNames, surahPdfs, sectionAudio } from './Data';
 
 const Quran = ({ activeSurahIndex, showSurah, closeSurah }) => {
   const firstTenSectionImages = [
@@ -11,52 +10,63 @@ const Quran = ({ activeSurahIndex, showSurah, closeSurah }) => {
     "img/agmy1.jpg",
     "img/sodes.jpg",
     "img/moeqlyi.jpeg",
-    "img/bloshy . jpg",
-    "/img/mshary.jpg",
+    "img/unnamed.png",
+    "img/mshary.jpg",
   ];
   const sectionImages = Array(114).fill(firstTenSectionImages);
 
+  const [surahNames, setSurahNames] = useState([]);
+  const [surahData, setSurahData] = useState({ name: '', pdfs: [], audio: [] });
   const [isLoading, setIsLoading] = useState(true);
-  const audioRefs = useRef([]); // لتخزين مراجع عناصر الصوت
+  const audioRefs = useRef([]);
 
-  const checkResourcesLoaded = () => {
-    if (activeSurahIndex !== null) {
-      const currentSurahImages = sectionImages[activeSurahIndex];
-      const currentSurahAudio = sectionAudio[activeSurahIndex];
-      const currentSurahPdf = surahPdfs[activeSurahIndex];
-
-      if (
-        currentSurahImages &&
-        currentSurahAudio &&
-        currentSurahAudio.length > 0 &&
-        currentSurahPdf
-      ) {
+  // Fetch all surah names
+  useEffect(() => {
+    const fetchSurahNames = async () => {
+      try {
+        const response = await fetch('https://gana-back-plum.vercel.app/api/surahs');
+        const data = await response.json();
+        setSurahNames(data.map(surah => surah.name));
+        setIsLoading(false);
+      } catch (error) {
+        console.error('Error fetching surah names:', error);
         setIsLoading(false);
       }
+    };
+    fetchSurahNames();
+  }, []);
+
+  // Fetch data for the active surah
+  useEffect(() => {
+    if (activeSurahIndex !== null) {
+      const fetchSurahData = async () => {
+        setIsLoading(true);
+        try {
+          const response = await fetch(`https://gana-back-plum.vercel.app/api/surahs/${activeSurahIndex + 1}`);
+          const data = await response.json();
+          setSurahData({
+            name: data.name,
+            pdfs: data.pdfs,
+            audio: data.audio
+          });
+          setIsLoading(false);
+        } catch (error) {
+          console.error('Error fetching surah data:', error);
+          setIsLoading(false);
+        }
+      };
+      fetchSurahData();
     } else {
+      setSurahData({ name: '', pdfs: [], audio: [] });
       setIsLoading(false);
     }
-  };
-
-  useEffect(() => {
-    setIsLoading(true);
-    checkResourcesLoaded();
-
-    const timeoutId = setTimeout(() => {
-      if (isLoading) {
-        checkResourcesLoaded();
-      }
-    }, 2000);
-
-    return () => clearTimeout(timeoutId);
   }, [activeSurahIndex]);
 
-  // دالة لإيقاف جميع المقاطع الصوتية باستثناء المقطع الحالي
   const handlePlay = (currentIndex) => {
     audioRefs.current.forEach((audio, index) => {
       if (index !== currentIndex && audio) {
         audio.pause();
-        audio.currentTime = 0; // إعادة المقطع إلى البداية (اختياري)
+        audio.currentTime = 0;
       }
     });
   };
@@ -92,7 +102,7 @@ const Quran = ({ activeSurahIndex, showSurah, closeSurah }) => {
           <button className="close-button" onClick={closeSurah}>
             ×
           </button>
-          <h2 className="text-2xl text-white mb-4 text-center">{surahNames[activeSurahIndex]}</h2>
+          <h2 className="text-2xl text-white mb-4 text-center">{surahData.name}</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 mb-4">
             {sectionImages[activeSurahIndex].map((image, index) => (
               <div key={index} className="relative cursor-pointer">
@@ -101,27 +111,31 @@ const Quran = ({ activeSurahIndex, showSurah, closeSurah }) => {
                   alt={`Section ${index + 1}`}
                   className="w-full h-auto object-cover rounded-lg aspect-[16/9]"
                 />
-                <audio
-                  controls
-                  className="w-full mt-2"
-                  ref={(el) => (audioRefs.current[index] = el)} // ربط العنصر بـ ref
-                  onPlay={() => handlePlay(index)} // تشغيل المقطع الحالي وإيقاف الباقي
-                >
-                  <source src={sectionAudio[activeSurahIndex][index]} type="audio/mpeg" />
-                  Your browser does not support the audio element.
-                </audio>
+                {surahData.audio[index] && (
+                  <audio
+                    controls
+                    className="w-full mt-2"
+                    ref={(el) => (audioRefs.current[index] = el)}
+                    onPlay={() => handlePlay(index)}
+                  >
+                    <source src={surahData.audio[index]} type="audio/mpeg" />
+                    Your browser does not support the audio element.
+                  </audio>
+                )}
               </div>
             ))}
           </div>
-          <div className="flex justify-center items-center h-screen">
-            <iframe
-              src={`https://drive.google.com/file/d/${surahPdfs[activeSurahIndex].split('/d/')[1].split('/view')[0]}/preview`}
-              width="95%"
-              height="600px"
-              className="border mx-auto block"
-              title="Surah Preview"
-            ></iframe>
-          </div>
+          {surahData.pdfs[0] && (
+            <div className="flex justify-center items-center h-screen">
+              <iframe
+                src={`https://drive.google.com/file/d/${surahData.pdfs[0].split('/d/')[1].split('/view')[0]}/preview`}
+                width="95%"
+                height="600px"
+                className="border mx-auto block"
+                title="Surah Preview"
+              ></iframe>
+            </div>
+          )}
         </div>
       )}
     </div>
